@@ -58,7 +58,7 @@ export async function generateAnswer(
   const context = transcriptions.join("\n\n");
 
   const prompt = `
-  Com base no texto fornecido abaixo, responda a pergunta de forma clara e precisa, em portguês do Brasil.
+  - Responda a pergunta de forma clara e precisa, em portguês do Brasil.
   
   CONTEXTO:
   ${context}
@@ -72,7 +72,7 @@ export async function generateAnswer(
   - Seja objetivo e direto na resposta.
   - Mantenha um tom profissional e educado.
   - Cite trechos relevantes do contexto quando necessário.
-  - Se for citar o contexto, use aspas para destacar a citação.
+  - Se o contexto for insuficiente, cite fontes externas confiáveis.
   `.trim();
 
   const response = await gemini.models.generateContent({

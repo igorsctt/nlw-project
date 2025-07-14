@@ -37,7 +37,7 @@ export const createQuestionRoute: FastifyPluginCallbackZod = (app) => {
           and(
             eq(schema.audioChunks.roomId, roomId),
             sql`
-        1 - (${schema.audioChunks.embeddings} <=> ${embeddingsAsString}::vector) > 0.7`
+        1 - (${schema.audioChunks.embeddings} <=> ${embeddingsAsString}::vector) > 0.6`
           )
         )
         .orderBy(

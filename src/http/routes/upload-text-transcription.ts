@@ -13,7 +13,7 @@ export const uploadTextTranscriptionRoute: FastifyPluginCallbackZod = (app) => {
           roomId: z.string(),
         }),
         body: z.object({
-          transcription: z.string().min(10, "Texto obrigatório"),
+          transcription: z.string(),
         }),
       },
     },
