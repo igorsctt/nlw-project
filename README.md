@@ -57,44 +57,129 @@ Instale as dependências:
 npm install
 ```
 
-### 3. Banco de Dados
+# NLW Project
 
-Inicie o PostgreSQL com Docker Compose:
+Este projeto é composto por duas aplicações principais:
+- **nlw-project**: Backend em Node.js
+- **nlw-web**: Frontend em React
 
-```bash
-docker-compose up -d
-```
-
-Aplique as migrações:
-
-```bash
-npx drizzle-kit migrate
-```
-
-(Opcional) Popule o banco:
-
-```bash
-npm run db:seed
-```
-
-### 4. Executando o Projeto
-
-Modo desenvolvimento:
-
-```bash
-npm run dev
-```
-
-Modo produção:
-
-```bash
-npm start
-```
-
-A API estará disponível em [http://localhost:3333](http://localhost:3333).
+## Sumário
+- [Descrição](#descrição)
+- [Tecnologias](#tecnologias)
+- [Estrutura de Pastas](#estrutura-de-pastas)
+- [Como Executar](#como-executar)
+- [Endpoints da API](#endpoints-da-api)
+- [Funcionalidades](#funcionalidades)
+- [Como Contribuir](#como-contribuir)
+- [Licença](#licença)
 
 ---
 
-## 💬 Preview
+## Descrição
 
-> Sinta-se à vontade para contribuir ou abrir issues!
+Este projeto é um sistema de perguntas e respostas em salas, com suporte a gravação de áudio, utilizando Node.js no backend e React no frontend. O backend expõe uma API REST para gerenciamento de salas, perguntas e upload de áudios. O frontend permite a criação de salas, envio de perguntas e interação com o sistema.
+
+## Tecnologias
+
+- **Backend:**
+  - Node.js
+  - TypeScript
+  - Drizzle ORM
+  - SQLite
+  - Docker
+  - Gemini API (serviço externo)
+
+- **Frontend:**
+  - React
+  - TypeScript
+  - Vite
+
+## Estrutura de Pastas
+
+```
+├── nlw-project/        # Backend
+│   ├── src/
+│   │   ├── db/         # Banco de dados, seeds, migrations
+│   │   ├── http/       # Rotas HTTP
+│   │   ├── services/   # Integrações externas
+│   │   ├── env.ts      # Variáveis de ambiente
+│   │   └── server.ts   # Inicialização do servidor
+│   ├── docker/         # Scripts Docker
+│   └── ...
+├── nlw-web/            # Frontend
+│   ├── src/
+│   │   ├── components/ # Componentes React
+│   │   ├── http/       # Hooks para requisições
+│   │   ├── lib/        # Utilitários
+│   │   ├── pages/      # Páginas principais
+│   │   └── ...
+│   └── ...
+```
+
+## Como Executar
+
+### Pré-requisitos
+- Node.js >= 18
+- Docker (opcional para banco de dados)
+
+### Backend
+
+1. Instale as dependências:
+   ```bash
+   cd nlw-project
+   npm install
+   ```
+2. Configure o banco de dados:
+   - Para SQLite, execute as migrations:
+     ```bash
+     npm run migrate
+     ```
+   - Ou utilize o Docker:
+     ```bash
+     docker-compose up
+     ```
+3. Inicie o servidor:
+   ```bash
+   npm run dev
+   ```
+
+### Frontend
+
+1. Instale as dependências:
+   ```bash
+   cd nlw-web
+   npm install
+   ```
+2. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+3. Acesse `http://localhost:5173` no navegador.
+
+## Endpoints da API
+
+- `POST /rooms` - Cria uma nova sala
+- `GET /rooms` - Lista todas as salas
+- `POST /questions` - Cria uma nova pergunta
+- `GET /rooms/:id/questions` - Lista perguntas de uma sala
+- `POST /upload-audio` - Faz upload de áudio
+
+## Funcionalidades
+
+- Criação e listagem de salas
+- Envio e listagem de perguntas
+- Upload e processamento de áudios
+- Integração com API Gemini para análise de áudio
+- Interface web intuitiva para interação
+
+## Como Contribuir
+
+1. Fork este repositório
+2. Crie uma branch: `git checkout -b minha-feature`
+3. Faça suas alterações e commit: `git commit -m 'feat: minha feature'`
+4. Envie para o repositório remoto: `git push origin minha-feature`
+5. Abra um Pull Request
+
+## Licença
+
+Este projeto está sob a licença MIT.
